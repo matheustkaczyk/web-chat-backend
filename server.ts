@@ -5,11 +5,11 @@ import { Server } from 'socket.io';
 const server = http.createServer(app);
 const io = new Server(server);
 
-io.on('connection', (socket) => {  
-  console.log('New user connected', socket.id);
+io.on('connection', (socket) => {
+  socket.broadcast.emit('message', `New user connected socket.id: ${socket.id}`);
 
-  socket.on('message', (msg) => {
-    console.log('message: ' + msg);
+  socket.on('userMessage', (object) => {
+    io.emit('message', `${object.username} - ${object.message}`)
   });
 })
 

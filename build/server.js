@@ -9,9 +9,9 @@ const socket_io_1 = require("socket.io");
 const server = http_1.default.createServer(app_1.default);
 const io = new socket_io_1.Server(server);
 io.on('connection', (socket) => {
-    console.log('New user connected', socket.id);
-    socket.on('message', (msg) => {
-        console.log('message: ' + msg);
+    socket.broadcast.emit('message', `New user connected socket.id: ${socket.id}`);
+    socket.on('userMessage', (object) => {
+        io.emit('message', `${object.username} - ${object.message}`);
     });
 });
 io.on('disconnect', () => {
