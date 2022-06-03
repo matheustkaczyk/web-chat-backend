@@ -6,10 +6,16 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 io.on('connection', (socket) => {
-  socket.broadcast.emit('message', `New user connected socket.id: ${socket.id}`);
+  socket.broadcast.emit('message', `Novo usuário conectado - ${socket.id}`);
+  socket.emit('message', `Seja bem vindo!`);
+
+  socket.on('room', room => {
+    socket.join(room);
+  })
 
   socket.on('userMessage', (object) => {
-    io.emit('message', `${object.username} - ${object.message}`)
+    socket.join(object.room);
+    io.to(object.room).emit('message', `${object.username} - ${object.message}`);
   });
 })
 
