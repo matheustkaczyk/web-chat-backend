@@ -11,6 +11,7 @@ io.on('connection', (socket) => {
 
   socket.on('room', room => {
     socket.join(room);
+    socket.emit('message', `Você entrou na sala ${room}`);
   })
 
   socket.on('userMessage', (object) => {

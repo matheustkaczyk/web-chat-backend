@@ -13,6 +13,7 @@ io.on('connection', (socket) => {
     socket.emit('message', `Seja bem vindo!`);
     socket.on('room', room => {
         socket.join(room);
+        socket.emit('message', `Você entrou na sala ${room}`);
     });
     socket.on('userMessage', (object) => {
         socket.join(object.room);
