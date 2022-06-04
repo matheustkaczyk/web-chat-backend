@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 
 const corsOptions = {
-  origin: "localhost:3000",
+  origin: "webchattkaczyk.netlify.app",
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
 }
 
