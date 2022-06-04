@@ -20,7 +20,4 @@ io.on('connection', (socket) => {
         io.to(object.room).emit('message', `${object.username} - ${object.message}`);
     });
 });
-io.on('disconnect', () => {
-    console.log('User disconnected');
-});
 server.listen(3001, () => console.log('Server is running on port 3001'));
