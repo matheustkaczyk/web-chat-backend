@@ -1,9 +1,14 @@
 import app from './app';
 import http from 'http';
 import { Server } from 'socket.io';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const server = http.createServer(app);
 const io = new Server(server);
+
+const PORT = process.env.PORT;
 
 io.on('connection', (socket) => {
   socket.broadcast.emit('message', `Novo usuário conectado - ${socket.id}`);
@@ -20,4 +25,4 @@ io.on('connection', (socket) => {
   });
 })
 
-server.listen(3001, () => console.log('Server is running on port 3001'));
+server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
